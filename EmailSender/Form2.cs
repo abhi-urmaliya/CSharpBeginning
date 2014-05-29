@@ -68,20 +68,35 @@ namespace EmailSender
         {
             XmlDocument doc = new XmlDocument();
             doc.Load("MailList.xml");
+            //bool flag = new bool();
             foreach (ListViewItem lvi in listView1.Items)
             {
-                XmlNode person = doc.CreateElement("Person");
-                XmlNode pName = doc.CreateElement("Name");
-                XmlNode pEmail = doc.CreateElement("Email");
-                XmlNode pCompany = doc.CreateElement("Company");
-                pName.InnerText = lvi.SubItems[0].Text;
-                pEmail.InnerText = lvi.SubItems[1].Text;
-                pCompany.InnerText = lvi.SubItems[2].Text;
-                person.AppendChild(pName);
-                person.AppendChild(pEmail);
-                person.AppendChild(pCompany);
-                doc.DocumentElement.AppendChild(person);
-                doc.Save("MailList.xml");
+                //foreach (XmlNode xNode in doc.SelectNodes("People/Person"))
+                //{
+                //    if (xNode.SelectSingleNode("Name").InnerText != lvi.SubItems[0].Text && xNode.SelectSingleNode("Email").InnerText != lvi.SubItems[1].Text && xNode.SelectSingleNode("Company").InnerText != lvi.SubItems[2].Text)
+                //    {
+                //        flag = true;
+                //    }
+                //    else
+                //    {
+                //        flag = false;
+                //    }
+                //}
+                //if (flag)
+                //{
+                    XmlNode person = doc.CreateElement("Person");
+                    XmlNode pName = doc.CreateElement("Name");
+                    XmlNode pEmail = doc.CreateElement("Email");
+                    XmlNode pCompany = doc.CreateElement("Company");
+                    pName.InnerText = lvi.SubItems[0].Text;
+                    pEmail.InnerText = lvi.SubItems[1].Text;
+                    pCompany.InnerText = lvi.SubItems[2].Text;
+                    person.AppendChild(pName);
+                    person.AppendChild(pEmail);
+                    person.AppendChild(pCompany);
+                    doc.DocumentElement.AppendChild(person);
+                    doc.Save("MailList.xml");
+                //}
             }
             MessageBox.Show("Mailing List saved in XML file!");
         }
