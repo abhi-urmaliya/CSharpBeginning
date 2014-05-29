@@ -21,6 +21,7 @@ namespace EmailSender
             Form2 f = new Form2();
             f.ShowDialog();
             recipients.Text = to;
+            emailFrom.Text = EmailSender.Properties.Settings.Default.EmailFrom;
         }
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -81,6 +82,12 @@ namespace EmailSender
             }
             catch { MessageBox.Show("There was an error sending the message! Make sure you typed in your credentials correctly and you have an internet connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             finally { button1.Enabled = true; }
+        }
+
+        private void saveAsDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EmailSender.Properties.Settings.Default.EmailFrom = emailFrom.Text;
+            EmailSender.Properties.Settings.Default.Save();
         }
     }
 }
