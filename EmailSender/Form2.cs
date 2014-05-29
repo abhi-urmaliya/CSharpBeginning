@@ -16,6 +16,13 @@ namespace EmailSender
         public Form2()
         {
             InitializeComponent();
+            writer.WriteStartDocument(true);
+            writer.Formatting = Formatting.Indented;
+            writer.Indentation = 2;
+            writer.WriteStartElement("People");
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,32 +66,24 @@ namespace EmailSender
 
         private void button2_Click(object sender, EventArgs e)
         {
-            writer.WriteStartDocument(true);
-            writer.Formatting = Formatting.Indented;
-            writer.Indentation = 2;
-            writer.WriteStartElement("People");
+            XmlDocument doc = new XmlDocument();
+            doc.Load("MailList.xml");
             foreach (ListViewItem lvi in listView1.Items)
             {
-                createNode(lvi.SubItems[0].Text, lvi.SubItems[1].Text, lvi.SubItems[2].Text);
+                XmlNode person = doc.CreateElement("Person");
+                XmlNode pName = doc.CreateElement("Name");
+                XmlNode pEmail = doc.CreateElement("Email");
+                XmlNode pCompany = doc.CreateElement("Company");
+                pName.InnerText = lvi.SubItems[0].Text;
+                pEmail.InnerText = lvi.SubItems[1].Text;
+                pCompany.InnerText = lvi.SubItems[2].Text;
+                person.AppendChild(pName);
+                person.AppendChild(pEmail);
+                person.AppendChild(pCompany);
+                doc.DocumentElement.AppendChild(person);
+                doc.Save("MailList.xml");
             }
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
-            writer.Close();
             MessageBox.Show("Mailing List saved in XML file!");
-        }
-
-        private void createNode(string pName, string pEmail, string pCompany) {
-            writer.WriteStartElement("Person");
-            writer.WriteStartElement("Name");
-            writer.WriteString(pName);
-            writer.WriteEndElement();
-            writer.WriteStartElement("Email");
-            writer.WriteString(pEmail);
-            writer.WriteEndElement();
-            writer.WriteStartElement("Company");
-            writer.WriteString(pCompany);
-            writer.WriteEndElement();
-            writer.WriteEndElement();
         }
     }
 }
