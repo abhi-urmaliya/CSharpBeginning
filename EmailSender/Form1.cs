@@ -14,11 +14,14 @@ namespace EmailSender
 {
     public partial class Form1 : Form
     {
+        public static string to;
         public Form1()
         {
             InitializeComponent();
+            Form2 f = new Form2();
+            f.ShowDialog();
+            recipients.Text = to;
         }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
