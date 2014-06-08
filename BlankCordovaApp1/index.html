@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html ng-app="phoneBook">
+<head>
+    <meta charset="utf-8" />
+    <title>BlankCordovaApp1</title>
+
+    <!-- BlankCordovaApp1 references -->
+    <link href="css/index.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    
+    <!-- CordovaToDoApp_AngularJS references -->
+    <script src="scripts/frameworks/angular.min.js"></script>
+    <script src="scripts/frameworks/angular-resource.min.js"></script>
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body ng-controller="callBook as call">
+    <!--<p>Hello, your application is ready!</p>-->
+    <div class="panel">
+        <h3 class="panel-heading">Search Friend</h3>
+        <form>
+            <input type="text" name="fn" id="fn" autofocus required />
+            <span class="panel-body">{{call.tel}}</span><br>
+            <input type="submit" ng-submit="call.display()" />
+        </form>
+    </div>
+
+    <script src="scripts/index.js"></script>
+</body>
+</html>
